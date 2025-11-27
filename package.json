@@ -6,7 +6,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{html,json,md,yaml}": [
+      "prettier --write"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint"
+    ]
   },
   "dependencies": {
     "next": "16.0.4",
