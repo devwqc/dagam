@@ -14,9 +14,12 @@ if (!projectId) {
 try {
   console.debug('=== Supabase DB types 생성 시작 ===');
 
-  execSync(`pnpm exec supabase gen types typescript --project-id ${projectId} > src/lib/supabase/database.types.ts`, {
-    stdio: 'inherit',
-  });
+  execSync(
+    `pnpm exec supabase gen types typescript --project-id ${projectId} --schema public > src/lib/supabase/database.types.ts`,
+    {
+      stdio: 'inherit',
+    },
+  );
 
   console.debug('=== Supabase DB types 생성 완료 ===');
   process.exit(0);
