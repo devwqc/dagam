@@ -4,20 +4,25 @@ export const validateEnv = () => {
   return null;
 };
 
-const NEXT_PUBLIC_SUPABASE_URL = 'NEXT_PUBLIC_SUPABASE_URL';
-const NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY = 'NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY';
-
-const getRequiredStringEnv = (envKey: string) => {
-  if (isNil(process.env[envKey])) {
-    throw new Error(`${envKey} env가 필요합니다.`);
-  }
-
-  return process.env[envKey];
-};
-
 const envConfig = {
-  supabaseUrl: getRequiredStringEnv(NEXT_PUBLIC_SUPABASE_URL),
-  supabasePublishableKey: getRequiredStringEnv(NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY),
+  supabaseUrl: (() => {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+
+    if (isNil(supabaseUrl)) {
+      throw new Error('NEXT_PUBLIC_SUPABASE_URL env가 필요합니다.');
+    }
+
+    return supabaseUrl;
+  })(),
+  supabasePublishableKey: (() => {
+    const supabasePublishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+    if (isNil(supabasePublishableKey)) {
+      throw new Error('NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY env가 필요합니다.');
+    }
+
+    return supabasePublishableKey;
+  })(),
 };
 
 export default envConfig;
